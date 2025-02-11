@@ -38,8 +38,8 @@ def move_png_to_archive():
 move_png_to_archive()
 
 # Coordonnées géographiques (La Mare)
-latitude = 48.53874483802106
-longitude = 1.870632145777986
+latitude = 49.6386
+longitude = -1.6164
 
 # URL de l'API Open-Meteo
 url = "https://api.open-meteo.com/v1/ecmwf"
