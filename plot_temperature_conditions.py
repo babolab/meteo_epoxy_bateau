@@ -28,22 +28,13 @@ if response.status_code == 200:
     df = pd.DataFrame(data['hourly'])
     df['time'] = pd.to_datetime(df['time'])  # Conversion des dates
 
-    # Filtrer les conditions spécifiques pour 5°C et 10°C
-    condition_5 = (df['temperature_2m'] == 5) & (df['dewpoint_2m'] == df['temperature_2m'] - 3)
-    condition_10 = (df['temperature_2m'] == 10) & (df['dewpoint_2m'] == df['temperature_2m'] - 3)
-
-    result_5 = df[condition_5]
-    result_10 = df[condition_10]
-
-    # Tracer les résultats
+    # Tracer les températures et le point de rosée
     plt.figure(figsize=(12, 6))
-    if not result_5.empty:
-        plt.plot(result_5['time'], result_5['temperature_2m'], 'o', label="Température 5°C")
-    if not result_10.empty:
-        plt.plot(result_10['time'], result_10['temperature_2m'], 'x', label="Température 10°C")
+    plt.plot(df['time'], df['temperature_2m'], label="Température (°C)")
+    plt.plot(df['time'], df['dewpoint_2m'], label="Point de rosée (°C)")
 
     # Ajouter des détails au graphique
-    plt.title("Conditions de température et de point de rosée")
+    plt.title("Températures et point de rosée sur les 15 prochains jours")
     plt.xlabel("Temps")
     plt.ylabel("Température (°C)")
     plt.legend()
