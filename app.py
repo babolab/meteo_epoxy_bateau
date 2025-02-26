@@ -80,6 +80,7 @@ st.subheader("Détection des créneaux favorables")
 temperature = st.selectbox(
     "Choisissez la température minimale",
     options=[5, 10],
+    index=1,  # Sélectionne 10°C par défaut
     format_func=lambda x: f"{x}°C"
 )
 
