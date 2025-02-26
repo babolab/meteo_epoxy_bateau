@@ -37,9 +37,24 @@ if response.status_code == 200:
 
     # Afficher les résultats
     if not result.empty:
-        print("\nPrévisions ECMWF - Température 5°C:")
-        print("====================================")
-        print(result[['time', 'temperature_2m', 'dewpoint_2m']].to_string(index=False))
+        print("\nPrévisions ECMWF - Créneaux où T° ≥ 5°C et point de rosée ≤ T°-3°C")
+        print("================================================================")
+        
+        # Identifier les créneaux consécutifs
+        result = result.reset_index(drop=True)
+        breaks = result.index[result['time'].diff() > pd.Timedelta(hours=1)].tolist()
+        start_idx = 0
+        
+        for break_idx in breaks + [len(result)]:
+            créneau = result.iloc[start_idx:break_idx]
+            début = créneau.iloc[0]
+            fin = créneau.iloc[-1]
+            
+            print(f"\nCréneau du {début['time'].strftime('%d/%m/%Y')}:")
+            print(f"  De  {début['time'].strftime('%Hh%M')} : {début['temperature_2m']:4.1f}°C (rosée: {début['dewpoint_2m']:4.1f}°C)")
+            print(f"  À   {fin['time'].strftime('%Hh%M')} : {fin['temperature_2m']:4.1f}°C (rosée: {fin['dewpoint_2m']:4.1f}°C)")
+            
+            start_idx = break_idx
     else:
         print("\nAucune correspondance trouvée pour 5°C avec ECMWF.")
 else:
