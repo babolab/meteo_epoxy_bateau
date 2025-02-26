@@ -32,11 +32,11 @@ if response.status_code == 200:
     df['time'] = pd.to_datetime(df['time'])  # Conversion des dates
 
     # Filtrer les conditions pour 5°C
-    condition_5 = (df['temperature_2m'] >= 5) & (df['dewpoint_2m'] == df['temperature_2m'] - 3)
+    condition_5 = (df['temperature_2m'] >= 5) & (df['dewpoint_2m'] <= df['temperature_2m'] - 3)
     result_5 = df[condition_5]
 
     # Filtrer les conditions pour 10°C
-    condition_10 = (df['temperature_2m'] >= 10) & (df['dewpoint_2m'] == df['temperature_2m'] - 3)
+    condition_10 = (df['temperature_2m'] >= 10) & (df['dewpoint_2m'] <= df['temperature_2m'] - 3)
     result_10 = df[condition_10]
 
     # Afficher les résultats pour 5°C
