@@ -1,6 +1,10 @@
 import requests
 import pandas as pd
 from datetime import datetime
+import sys
+
+# Configuration de l'encodage pour la sortie console
+sys.stdout.reconfigure(encoding='utf-8')
 
 # Coordonnées géographiques (Cherbourg)
 latitude = 49.6386
@@ -33,9 +37,10 @@ if response.status_code == 200:
 
     # Afficher les résultats
     if not result.empty:
-        print("Jours et heures où la température est de 0°C et le point de rosée est de 3°C de moins :")
-        print(result[['time', 'temperature_2m', 'dewpoint_2m']])
+        print("\nPrévisions ECMWF - Température 0°C:")
+        print("====================================")
+        print(result[['time', 'temperature_2m', 'dewpoint_2m']].to_string(index=False))
     else:
-        print("Aucune correspondance trouvée pour les conditions spécifiées.")
+        print("\nAucune correspondance trouvée pour 0°C avec ECMWF.")
 else:
     print("Erreur lors de la récupération des données :", response.text)

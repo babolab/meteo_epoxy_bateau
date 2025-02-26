@@ -1,6 +1,10 @@
 import requests
 import pandas as pd
 from datetime import datetime
+import sys
+
+# Configuration de l'encodage pour la sortie console
+sys.stdout.reconfigure(encoding='utf-8')
 
 # Coordonnées géographiques (Cherbourg)
 latitude = 49.6386
@@ -36,19 +40,19 @@ if response.status_code == 200:
     result_10 = df[condition_10]
 
     # Afficher les résultats pour 5°C
-    print("\nRésultats pour 5°C :")
+    print("\nPrévisions GFS - Température 5°C:")
+    print("================================")
     if not result_5.empty:
-        print("Jours et heures où la température est de 5°C et le point de rosée est de 3°C de moins :")
-        print(result_5[['time', 'temperature_2m', 'dewpoint_2m']])
+        print(result_5[['time', 'temperature_2m', 'dewpoint_2m']].to_string(index=False))
     else:
-        print("Aucune correspondance trouvée pour 5°C.")
+        print("Aucune correspondance trouvée pour 5°C avec GFS.")
 
     # Afficher les résultats pour 10°C
-    print("\nRésultats pour 10°C :")
+    print("\nPrévisions GFS - Température 10°C:")
+    print("=================================")
     if not result_10.empty:
-        print("Jours et heures où la température est de 10°C et le point de rosée est de 3°C de moins :")
-        print(result_10[['time', 'temperature_2m', 'dewpoint_2m']])
+        print(result_10[['time', 'temperature_2m', 'dewpoint_2m']].to_string(index=False))
     else:
-        print("Aucune correspondance trouvée pour 10°C.")
+        print("Aucune correspondance trouvée pour 10°C avec GFS.")
 else:
     print("Erreur lors de la récupération des données :", response.text)
