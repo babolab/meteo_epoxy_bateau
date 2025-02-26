@@ -1,34 +1,63 @@
-# Scripts de Prévision Météorologique
+# Prévisions Météorologiques - La Mare
 
-Ce projet contient plusieurs scripts Python pour analyser les prévisions météorologiques à Cherbourg (49.6386°N, -1.6164°E) en utilisant l'API Open-Meteo.
+Ce projet contient une collection de scripts Python pour analyser les prévisions météorologiques à La Mare (49.6386°N, -1.6164°E) en utilisant l'API Open-Meteo.
+
+## Description
+
+Le projet utilise deux modèles de prévision différents :
+- ECMWF (European Centre for Medium-Range Weather Forecasts)
+- GFS (Global Forecast System)
 
 ## Scripts disponibles
 
-### Détection de conditions spécifiques
+### Scripts de détection de conditions spécifiques
 
-- `temperature_5.py` : Détecte quand la température est de 5°C avec un point de rosée 3°C plus bas
-- `script_temperature_0.py` : Détecte quand la température est de 0°C avec un point de rosée 3°C plus bas
-- `script_temperature_10.py` : Détecte quand la température est de 10°C avec un point de rosée 3°C plus bas
+Ces scripts recherchent des créneaux horaires où la température et le point de rosée respectent des conditions particulières :
+- `temperature_5.py` : Température ≥ 5°C avec point de rosée ≤ T°-3°C
+- `script_temperature_0.py` : Température ≥ 0°C avec point de rosée ≤ T°-3°C
+- `script_temperature_10.py` : Température ≥ 10°C avec point de rosée ≤ T°-3°C
 
-### Visualisation des données
+Chaque script affiche les créneaux trouvés avec :
+- La date
+- L'heure de début et de fin
+- Les températures et points de rosée correspondants
 
-- `plot_temperature_conditions.py` : Génère un graphique des températures et points de rosée sur 15 jours en utilisant le modèle ECMWF
-- `long_term_forecast.py` : Génère un graphique similaire mais sur 16 jours en utilisant le modèle GFS
+### Scripts de visualisation
 
-## Fonctionnalités communes
+- `plot_temperature_conditions.py` : Graphique sur 16 jours (modèle ECMWF)
+- `long_term_forecast.py` : Graphique sur 16 jours (modèle GFS)
 
-Tous les scripts :
-- Utilisent l'API Open-Meteo (ECMWF ou GFS)
-- Récupèrent les données de température et point de rosée
-- Utilisent pandas pour le traitement des données
-- Incluent la gestion des erreurs de l'API
+Les graphiques montrent l'évolution :
+- De la température à 2m du sol
+- Du point de rosée
 
-## Dépendances
+## Installation
 
-- requests
-- pandas
-- matplotlib (pour les scripts de visualisation)
+1. Cloner le repository
+2. Installer les dépendances :
+```bash
+pip install -r requirements.txt
+```
 
 ## Utilisation
 
-Exécutez chaque script individuellement selon vos besoins d'analyse. Les scripts de détection afficheront les résultats dans la console, tandis que les scripts de visualisation généreront des graphiques.
+Chaque script peut être exécuté individuellement :
+```bash
+python temperature_5.py
+python long_term_forecast.py
+```
+
+Les scripts de détection affichent les résultats dans la console.
+Les scripts de visualisation ouvrent une fenêtre avec le graphique généré.
+
+## Dépendances
+
+Voir le fichier `requirements.txt` pour la liste complète des dépendances et leurs versions.
+
+## Notes techniques
+
+- Utilisation de l'API gratuite Open-Meteo
+- Données horaires de température et point de rosée
+- Prévisions jusqu'à 16 jours
+- Traitement des données avec pandas
+- Visualisation avec matplotlib
