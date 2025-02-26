@@ -6,7 +6,7 @@ import sys
 # Configuration de l'encodage pour la sortie console
 sys.stdout.reconfigure(encoding='utf-8')
 
-# Coordonnées géographiques (La Mare)
+# Coordonnées géographiques (Cherbourg)
 latitude = 49.6386
 longitude = -1.6164
 
