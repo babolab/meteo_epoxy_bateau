@@ -39,20 +39,30 @@ if response.status_code == 200:
     condition_10 = (df['temperature_2m'] >= 10) & (df['dewpoint_2m'] <= df['temperature_2m'] - 3)
     result_10 = df[condition_10]
 
-    # Afficher les résultats pour 5°C
-    print("\nPrévisions GFS - Température 5°C:")
-    print("================================")
-    if not result_5.empty:
-        print(result_5[['time', 'temperature_2m', 'dewpoint_2m']].to_string(index=False))
-    else:
-        print("Aucune correspondance trouvée pour 5°C avec GFS.")
+    def afficher_creneaux(result, temperature):
+        if not result.empty:
+            print(f"\nPrévisions GFS - Créneaux où T° ≥ {temperature}°C et point de rosée ≤ T°-3°C")
+            print("=" * 70)
+            
+            result = result.reset_index(drop=True)
+            breaks = result.index[result['time'].diff() > pd.Timedelta(hours=1)].tolist()
+            start_idx = 0
+            
+            for break_idx in breaks + [len(result)]:
+                créneau = result.iloc[start_idx:break_idx]
+                début = créneau.iloc[0]
+                fin = créneau.iloc[-1]
+                
+                print(f"\nCréneau du {début['time'].strftime('%d/%m/%Y')}:")
+                print(f"  De  {début['time'].strftime('%Hh%M')} : {début['temperature_2m']:4.1f}°C (rosée: {début['dewpoint_2m']:4.1f}°C)")
+                print(f"  À   {fin['time'].strftime('%Hh%M')} : {fin['temperature_2m']:4.1f}°C (rosée: {fin['dewpoint_2m']:4.1f}°C)")
+                
+                start_idx = break_idx
+        else:
+            print(f"\nAucune correspondance trouvée pour {temperature}°C avec GFS.")
 
-    # Afficher les résultats pour 10°C
-    print("\nPrévisions GFS - Température 10°C:")
-    print("=================================")
-    if not result_10.empty:
-        print(result_10[['time', 'temperature_2m', 'dewpoint_2m']].to_string(index=False))
-    else:
-        print("Aucune correspondance trouvée pour 10°C avec GFS.")
+    # Afficher les résultats
+    afficher_creneaux(result_5, 5)
+    afficher_creneaux(result_10, 10)
 else:
     print("Erreur lors de la récupération des données :", response.text)
