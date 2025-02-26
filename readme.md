@@ -1,6 +1,6 @@
-# Prévisions Météorologiques - La Mare
+# Prévisions Météorologiques - Cherbourg
 
-Ce projet contient une collection de scripts Python pour analyser les prévisions météorologiques à La Mare (49.6386°N, -1.6164°E) en utilisant l'API Open-Meteo.
+Ce projet contient une collection de scripts Python pour analyser les prévisions météorologiques à Cherbourg (49.6386°N, -1.6164°E) en utilisant l'API Open-Meteo.
 
 ## Description
 
@@ -24,7 +24,7 @@ Chaque script affiche les créneaux trouvés avec :
 
 ### Scripts de visualisation
 
-- `plot_temperature_conditions.py` : Graphique sur 16 jours (modèle ECMWF)
+- `plot_temperature_conditions.py` : Graphique sur 15 jours (modèle ECMWF)
 - `long_term_forecast.py` : Graphique sur 16 jours (modèle GFS)
 
 Les graphiques montrent l'évolution :
