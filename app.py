@@ -67,13 +67,13 @@ def get_weather_intervals(temperature_seuil):
 
 # Configuration de la page Streamlit
 st.set_page_config(
-    page_title="Prévisions Météo Cherbourg",
+    page_title="Prévisions Météo Cherbourg pour application d'époxy",
     page_icon="🌡️",
     layout="wide"
 )
 
 # Titre de l'application
-st.title("🌡️ Prévisions Météo - Cherbourg")
+st.title("🌡️ Prévisions Météo pour époxy - Cherbourg")
 st.subheader("Détection des créneaux favorables")
 
 # Sélection de la température
