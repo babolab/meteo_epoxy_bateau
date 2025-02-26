@@ -28,7 +28,7 @@ if response.status_code == 200:
     df['time'] = pd.to_datetime(df['time'])  # Conversion des dates
 
     # Filtrer les conditions spécifiques
-    condition = (df['temperature_2m'] == 10) & (df['dewpoint_2m'] == df['temperature_2m'] - 3)
+    condition = (df['temperature_2m'] >= 10) & (df['dewpoint_2m'] == df['temperature_2m'] - 3)
     result = df[condition]
 
     # Afficher les résultats
