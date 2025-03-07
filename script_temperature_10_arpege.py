@@ -10,8 +10,8 @@ sys.stdout.reconfigure(encoding='utf-8')
 latitude = 49.6386
 longitude = -1.6164
 
-# URL de l'API Open-Meteo avec le modèle Arpège
-url = "https://api.open-meteo.com/v1/arpege"
+# URL de l'API Open-Meteo avec le modèle Météo France (Arpège)
+url = "https://api.open-meteo.com/v1/meteofrance"
 
 # Paramètres de la requête
 params = {
